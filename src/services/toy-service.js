@@ -50,13 +50,16 @@ function save(toy) {
 function _update(toy) {
     return axios.put(API_URL, toy)
         .then(res => res.data)
-        .then(console.log)
+        .catch(err => { throw err })
     // return storageService.put(TOYS_KEY, toy)
 }
 
 function _add(toy) {
     toy.createdAt = Date.now()
-    return storageService.post(TOYS_KEY, toy)
+    return axios.post(API_URL, toy)
+        .then(res => res.data)
+        .catch(err => { throw err })
+    // return storageService.post(TOYS_KEY, toy)
 }
 function getEmptyToy() {
     return {
