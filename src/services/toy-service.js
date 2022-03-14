@@ -10,11 +10,11 @@ export const toyService = {
 }
 
 const TOYS_KEY = 'toysDB'
-const API_URL = `/api/toy`
+const API_URL = `http://localhost:3031/api/toy`
 _createToys()
 
 function query() {
-    return axios.get('http://localhost:3031/api/toy')
+    return axios.get(API_URL)
         .then(res => res.data)
         .catch(err => {
             throw err
@@ -23,7 +23,8 @@ function query() {
 }
 
 function remove(_id) {
-    return storageService.remove(TOYS_KEY, _id)
+    return axios.delete(`${API_URL}/${_id}`)
+    // return storageService.remove(TOYS_KEY, _id)
 }
 
 function getById(_id) {
