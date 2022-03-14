@@ -48,6 +48,13 @@ export default {
                 .catch(() => {
                     console.log('couldnt remove toy')
                 })
+        },
+        saveToy({ commit }, payload) {
+            toyService.save(payload.toy)
+                .then(toy => commit(payload))
+                .catch(() => {
+                    console.log('couldnt save toy')
+                })
         }
     }
 }

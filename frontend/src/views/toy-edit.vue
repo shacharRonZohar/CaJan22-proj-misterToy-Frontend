@@ -10,6 +10,7 @@
                 <option value="true">In Stock</option>
                 <option value="false">Out of Stock</option>
             </select>-->
+            <button class="btn">save</button>
         </form>
     </section>
 </template>
@@ -39,7 +40,7 @@ export default {
         saveToy() {
             this.$store.dispatch({
                 type: 'saveToy',
-                toyToEdit
+                toy: this.toyToEdit
             })
         }
     },
