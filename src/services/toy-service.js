@@ -30,6 +30,7 @@ function remove(_id) {
 function getById(_id) {
     // return storageService.get(TOYS_KEY, _id)
     return axios.get(`${API_URL}/${_id}`)
+        .then(res => res.data)
         .then(toy => {
             toy.reviews = [{
                 txt: 'It was great!',
@@ -47,7 +48,10 @@ function save(toy) {
 }
 
 function _update(toy) {
-    return storageService.put(TOYS_KEY, toy)
+    return axios.put(API_URL, toy)
+        .then(res => res.data)
+        .then(console.log)
+    // return storageService.put(TOYS_KEY, toy)
 }
 
 function _add(toy) {
