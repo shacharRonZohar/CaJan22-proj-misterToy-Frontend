@@ -1,4 +1,5 @@
 import { storageService } from './async-storage-service.js'
+import axios from 'axios'
 
 export const toyService = {
     save,
@@ -9,10 +10,16 @@ export const toyService = {
 }
 
 const TOYS_KEY = 'toysDB'
+const API_URL = `/api/toy`
 _createToys()
 
 function query() {
-    return storageService.query(TOYS_KEY)
+    return axios.get('http://localhost:3031/api/toy')
+        .then(res => res.data)
+        .catch(err => {
+            throw err
+        })
+    // return storageService.query(TOYS_KEY)
 }
 
 function remove(_id) {
