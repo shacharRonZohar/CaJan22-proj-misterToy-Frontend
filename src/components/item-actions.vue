@@ -1,7 +1,7 @@
 <template>
     <section v-if="_id">
         <router-link :to="editPath" class="btn btn-primary">Edit</router-link>
-        <!-- <button @click="goToDetail" class="btn btn-info">details</button> -->
+        <router-link :to="detailsPath" class="btn btn-info">See More</router-link>
         <button @click="removeToy(_id)" class="btn btn-danger">Delete</button>
     </section>
 </template>
@@ -9,11 +9,10 @@
 <script>
 
 export default {
-    // props: [''],
     props: {
-        _id: Number,
-        // required: true
-    },
+        _id: String
+    }
+    ,
     components: {},
     created() { },
     data() {
@@ -30,6 +29,9 @@ export default {
     computed: {
         editPath() {
             return `/toy/edit/${this._id}`
+        },
+        detailsPath() {
+            return `/toy/${this._id}`
         }
     },
     unmounted() { },

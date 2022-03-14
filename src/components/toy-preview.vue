@@ -14,7 +14,7 @@
             </template>
             <template #footer>
                 <!-- TODO: Make dynamic -->
-                <item-actions :_id="+toy._id"></item-actions>
+                <item-actions :_id="toy._id"></item-actions>
             </template>
         </custom-card>
     </li>

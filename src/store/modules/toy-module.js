@@ -49,9 +49,9 @@ export default {
                     console.log('couldnt remove toy')
                 })
         },
-        saveToy({ commit }, payload) {
+        saveToy({ dispatch }, payload) {
             toyService.save(payload.toy)
-                .then(toy => commit(payload))
+                .then(() => dispatch('loadToys'))
                 .catch(() => {
                     console.log('couldnt save toy')
                 })

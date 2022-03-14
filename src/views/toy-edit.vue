@@ -31,6 +31,7 @@ export default {
                 const _id = +this.$route.params.toyId
                 if (!_id) this.toyToEdit = toyService.getEmptyToy()
                 else toyService.getById(_id)
+                    // else toyService.getById(_id)
                     .then(toy => this.toyToEdit = toy)
             },
             immediate: true
@@ -38,6 +39,7 @@ export default {
     },
     methods: {
         saveToy() {
+            this.$router.push('/toy')
             this.$store.dispatch({
                 type: 'saveToy',
                 toy: this.toyToEdit
