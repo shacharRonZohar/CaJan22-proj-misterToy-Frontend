@@ -9,9 +9,10 @@ export const toyService = {
     getEmptyToy
 }
 
-const TOYS_KEY = 'toysDB'
+// const TOYS_KEY = 'toysDB'
 const API_URL = `http://localhost:3031/api/toy`
-_createToys()
+
+// _createToys()
 
 function query() {
     return axios.get(API_URL)
@@ -61,6 +62,7 @@ function _add(toy) {
         .catch(err => { throw err })
     // return storageService.post(TOYS_KEY, toy)
 }
+
 function getEmptyToy() {
     return {
         _id: ``,
@@ -71,6 +73,8 @@ function getEmptyToy() {
         inStock: true
     }
 }
+
+// For use in frontend testing only
 function _createToys() {
     query()
         .then(toys => {
