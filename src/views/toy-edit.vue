@@ -28,7 +28,7 @@ export default {
     watch: {
         'this.$route.params.toyId': {
             handler() {
-                const _id = +this.$route.params.toyId
+                const _id = this.$route.params.toyId
                 if (!_id) this.toyToEdit = toyService.getEmptyToy()
                 else toyService.getById(_id)
                     // else toyService.getById(_id)

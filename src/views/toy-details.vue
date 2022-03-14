@@ -21,7 +21,7 @@ export default {
     watch: {
         'this.$route.params.toyId': {
             handler() {
-                toyService.getById(+this.$route.params.toyId)
+                toyService.getById(this.$route.params.toyId)
                     .then(toy => this.toy = toy)
             },
             immediate: true

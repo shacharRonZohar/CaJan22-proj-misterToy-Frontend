@@ -21,6 +21,17 @@ function remove(_id) {
 
 function getById(_id) {
     return storageService.get(TOYS_KEY, _id)
+        .then(toy => {
+            console.log(toy)
+            toy.reviews = [{
+                txt: 'It was great!',
+                createdAt: Date.now()
+            }]
+            return toy
+        })
+        .catch((err) => {
+            throw err
+        })
 }
 
 function save(toy) {
