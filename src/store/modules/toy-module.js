@@ -3,7 +3,8 @@ import { toyService } from '../../services/toy-service.js'
 export default {
     strict: true,
     state: {
-        toys: []
+        toys: [],
+        filterBy: {},
     },
     getters: {
         toys(state) {
@@ -17,15 +18,18 @@ export default {
         removeToy(state, { _id }) {
             const idx = state.toys.findIndex(toy => toy._id === _id)
             state.toys.splice(idx, 1)
-        }
+        },
+        setFilter(state, { filterBy }) {
+            state.filterBy = filterBy
+        },
     },
     actions: {
-        loadToys({ commit }) {
+        loadToys({ commit, state }) {
             commit({
                 type: 'setIsLoading',
                 isLoading: true
             })
-            toyService.query()
+            toyService.query(state.filterBy)
                 .then(toys => commit({
                     type: 'setToys',
                     toys
@@ -55,6 +59,10 @@ export default {
                 .catch(() => {
                     console.log('couldnt save toy')
                 })
-        }
+        },
+        filter({ commit, dispatch }, { filterBy }) {
+            commit({ type: 'setFilter', filterBy })
+            dispatch({ type: 'loadToys' })
+        },
     }
 }

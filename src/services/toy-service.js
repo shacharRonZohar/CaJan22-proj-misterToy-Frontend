@@ -14,8 +14,9 @@ const API_URL = `http://localhost:3031/api/toy`
 
 // _createToys()
 
-function query() {
-    return axios.get(API_URL)
+function query(filterBy) {
+    console.log(filterBy)
+    return axios.get(API_URL, { params: filterBy })
         .then(res => res.data)
         .catch(err => {
             throw err

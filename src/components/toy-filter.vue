@@ -1,36 +1,55 @@
 <template>
   <section class="toy-filter">
-      <input type="search" @input="setFilter" v-model="filterBy.name" placeholder="Search toy">
+    <input v-model="filterBy.name" @input="setFilter" type="text" placeholder="Search toy.." />
+    <label>
+      Stock:
+      <select @change="setFilter" v-model="filterBy.inStock">
+        <option value>All</option>
+        <option value="true">In stock</option>
+        <option value="false">Not in stock</option>
+      </select>
+    </label>
+    <label>
+      Labels:
+      <select @change="setFilter" multiple v-model="filterBy.labels">
+        <option value="On wheels">On wheels</option>
+        <option value="Box game">Box game</option>
+        <option value="Art">Art</option>
+        <option value="Baby">Baby</option>
+        <option value="Doll">Doll</option>
+        <option value="Puzzle">Puzzle</option>
+        <option value="Outdoor">Outdoor</option>
+      </select>
       <label>
-            In stock:
-            <select v-model="filterBy.inStock" @change="setFilter">
-              <option value="all">All</option>
-              <option value="instock">In stock</option>
-              <option  value="not-instock">Not in stock</option>
-            </select>
-          </label>
+        Sort By:
+        <select @change="setFilter" v-model="filterBy.sortBy">
+          <option value="createdAt">Time</option>
+          <option value="name">Name</option>
+          <option value="price">Price</option>
+        </select>
+      </label>
+    </label>
   </section>
 </template>
 
 <script>
 export default {
-  name: "todo-filter",
+  name: 'toy-filter',
   data() {
     return {
       filterBy: {
         name: '',
-        inStock: 'all',
-        toyLabel: '',
+        inStock: '',
+        labels: [],
+        sortBy: '',
       },
-    };
+    }
   },
   methods: {
-      setFilter(){
-      this.$emit('filtered', {...this.filterBy})
-    } 
+    setFilter() {
+      // console.log(this.filterBy)
+      this.$emit('setFilter', JSON.parse(JSON.stringify(this.filterBy)))
+    },
   },
-};
+}
 </script>
-
-<style>
-</style>
