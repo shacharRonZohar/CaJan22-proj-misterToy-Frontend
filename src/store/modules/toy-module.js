@@ -14,19 +14,6 @@ export default {
         labels(state) {
             return JSON.parse(JSON.stringify(state.labels))
         },
-        pricesByType(state) {
-            if (!state.toys.length) return
-            return state.labels.reduce((acc, label) => {
-                acc.push(state.toys
-                    .filter(toy => {
-                        return toy.labels.includes(label)
-                    })
-                    .reduce((accPrice, toy) => {
-                        return accPrice + toy.price
-                    }, 0))
-                return acc
-            }, [])
-        },
         detailByType: (state) => (cb) => {
             if (!state.toys.length) return
             return state.labels.reduce((acc, label) => {
@@ -38,19 +25,6 @@ export default {
                 return acc
             }, [])
         }
-        // stockByType(state) {
-        //     return state.labels.reduce((acc, label) => {
-        //         acc.push(state.toys
-        //             .filter(toy => {
-        //                 return toy.labels.includes(label)
-        //             })
-        //             .reduce((acc, toy) => {
-        //                 if (toy.inStock) return ++acc
-        //                 else return acc
-        //             }, 0))
-        //         return acc
-        //     }, [])
-        // }
     },
     mutations: {
         setToys(state, { toys }) {

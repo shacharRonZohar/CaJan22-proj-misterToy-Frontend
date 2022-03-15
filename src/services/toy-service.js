@@ -10,13 +10,12 @@ export const toyService = {
 }
 
 // const TOYS_KEY = 'toysDB'
-const API_URL = `http://localhost:3031/api/toy`
-
+const BASE_URL = (process.env.NODE_ENV !== 'development') ? '/api/toy/' : '/localhost:3000/api/toy/'
 // _createToys()
 
 function query(filterBy) {
     console.log(filterBy)
-    return axios.get(API_URL, { params: filterBy })
+    return axios.get(BASE_URL, { params: filterBy })
         .then(res => res.data)
         .catch(err => {
             throw err
@@ -25,13 +24,13 @@ function query(filterBy) {
 }
 
 function remove(_id) {
-    return axios.delete(`${API_URL}/${_id}`)
+    return axios.delete(`${BASE_URL}/${_id}`)
     // return storageService.remove(TOYS_KEY, _id)
 }
 
 function getById(_id) {
     // return storageService.get(TOYS_KEY, _id)
-    return axios.get(`${API_URL}/${_id}`)
+    return axios.get(`${BASE_URL}/${_id}`)
         .then(res => res.data)
         .then(toy => {
             toy.reviews = [{
@@ -50,7 +49,7 @@ function save(toy) {
 }
 
 function _update(toy) {
-    return axios.put(API_URL, toy)
+    return axios.put(BASE_URL, toy)
         .then(res => res.data)
         .catch(err => { throw err })
     // return storageService.put(TOYS_KEY, toy)
@@ -58,7 +57,7 @@ function _update(toy) {
 
 function _add(toy) {
     toy.createdAt = Date.now()
-    return axios.post(API_URL, toy)
+    return axios.post(BASE_URL, toy)
         .then(res => res.data)
         .catch(err => { throw err })
     // return storageService.post(TOYS_KEY, toy)
