@@ -1,7 +1,7 @@
 <template>
   <section class="app-container container" container>
     <app-header />
-    <router-view />
+    <router-view v-if="isReady" />
   </section>
 </template>
   
@@ -12,10 +12,13 @@ import appHeader from './components/app-header.vue'
 export default {
   name: 'app',
   data() {
-    return {}
+    return {
+      isReady: false
+    }
   },
   created() {
     this.$store.dispatch({ type: 'loadToys' })
+      .then(() => this.isReady = true)
   },
   components: {
     appHeader,

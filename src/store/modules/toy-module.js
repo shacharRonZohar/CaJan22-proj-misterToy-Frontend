@@ -5,10 +5,39 @@ export default {
     state: {
         toys: [],
         filterBy: {},
+        labels: ["On wheels", "Box game", "Art", "Baby", "Doll", "Puzzle", "Outdoor", "Battery Powered"]
     },
     getters: {
         toys(state) {
-            return state.toys
+            return JSON.parse(JSON.stringify(state.toys))
+        },
+        labels(state) {
+            return JSON.parse(JSON.stringify(state.labels))
+        },
+        pricesByType(state) {
+            return state.labels.reduce((acc, label) => {
+                acc.push(state.toys
+                    .filter(toy => {
+                        return toy.labels.includes(label)
+                    })
+                    .reduce((acc, toy) => {
+                        return acc + toy.price
+                    }, 0))
+                return acc
+            }, [])
+        },
+        stockByType(state) {
+            return state.labels.reduce((acc, label) => {
+                acc.push(state.toys
+                    .filter(toy => {
+                        return toy.labels.includes(label)
+                    })
+                    .reduce((acc, toy) => {
+                        if (toy.inStock) return ++acc
+                        else return acc
+                    }, 0))
+                return acc
+            }, [])
         }
     },
     mutations: {
