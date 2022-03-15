@@ -2,7 +2,7 @@
 <template>
   <main>
     <dashboard-chart :labels="labels" :chartData="pricesByType" />
-    <dashboard-chart :labels="labels" :chartData="stockByType" />
+    <!-- <dashboard-chart :labels="labels" :chartData="stockByType" /> -->
   </main>
 </template>
 
@@ -19,7 +19,7 @@ export default {
   },
   computed: {
     pricesByType() {
-      console.log('pricesByType ran')
+      console.log('pricesByType ran', this.$store.getters.pricesByType)
       return this.$store.getters.pricesByType
     },
     stockByType() {

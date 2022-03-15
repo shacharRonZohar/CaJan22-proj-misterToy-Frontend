@@ -15,7 +15,14 @@ export default {
     },
     data() {
         return {
-            testData: {
+        }
+    },
+    mounted() {
+        console.log(this.chartData)
+    },
+    computed: {
+        testData() {
+            return {
                 labels: this.labels,
                 datasets: [{
                     data: this.chartData,
@@ -24,8 +31,14 @@ export default {
             }
         }
     },
-    mounted() {
-        console.log(this.chartData)
+    watch: {
+        'this.chartData': {
+            handler() {
+
+            },
+            deep: true,
+            immediate: true
+        }
     },
     components: {
         DoughnutChart
