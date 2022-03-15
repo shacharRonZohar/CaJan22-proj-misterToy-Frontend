@@ -2,7 +2,7 @@
 <template>
   <main>
     <dashboard-chart :labels="labels" :chartData="pricesByType" />
-    <!-- <dashboard-chart :labels="labels" :chartData="stockByType" /> -->
+    <dashboard-chart :labels="labels" :chartData="stockByType" />
   </main>
 </template>
 
@@ -19,16 +19,20 @@ export default {
   },
   computed: {
     pricesByType() {
-      console.log('pricesByType ran', this.$store.getters.pricesByType)
-      return this.$store.getters.pricesByType
+      console.log('pricesByType ran')
+      const cb = (accPrice, toy) => {
+        return accPrice + toy.price
+      }
+      return this.$store.getters.detailByType(cb)
     },
     stockByType() {
       console.log('stockByType ran')
-      return this.$store.getters.stockByType
+      const cb = (acc, toy) => {
+        if (toy.inStock) return ++acc
+        else return acc
+      }
+      return this.$store.getters.detailByType(cb)
     }
   },
-  // mounted() {
-  //   this.pricesByType = this.$store.getters.pricesByType
-  // },
 }
 </script>

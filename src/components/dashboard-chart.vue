@@ -13,13 +13,6 @@ export default {
         labels: Array,
         chartData: Array
     },
-    data() {
-        return {
-        }
-    },
-    mounted() {
-        console.log(this.chartData)
-    },
     computed: {
         testData() {
             return {
@@ -29,15 +22,6 @@ export default {
                     backgroundColor: ['#77CEFF', '#0079AF', '#123E6B', '#97B0C4', '#A5C8ED'],
                 }],
             }
-        }
-    },
-    watch: {
-        'this.chartData': {
-            handler() {
-
-            },
-            deep: true,
-            immediate: true
         }
     },
     components: {

@@ -15,7 +15,6 @@ export default {
             return JSON.parse(JSON.stringify(state.labels))
         },
         pricesByType(state) {
-            console.log('priceByType')
             if (!state.toys.length) return
             return state.labels.reduce((acc, label) => {
                 acc.push(state.toys
@@ -28,6 +27,17 @@ export default {
                 return acc
             }, [])
         },
+        detailByType: (state) => (cb) => {
+            if (!state.toys.length) return
+            return state.labels.reduce((acc, label) => {
+                acc.push(state.toys
+                    .filter(toy => {
+                        return toy.labels.includes(label)
+                    })
+                    .reduce(cb, 0))
+                return acc
+            }, [])
+        }
         // stockByType(state) {
         //     return state.labels.reduce((acc, label) => {
         //         acc.push(state.toys
